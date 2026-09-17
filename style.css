@@ -27,7 +27,6 @@ body{
  
 .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
  
-/* ---------- หัวเว็บ ---------- */
 .topbar{background:var(--ink);color:#fff;padding:14px 0}
 .topbar__inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{
@@ -44,14 +43,12 @@ body{
 }
 .linkbtn:hover{border-color:var(--highlight);color:var(--highlight)}
  
-/* ---------- ตั้งค่า ---------- */
 .settings{background:#e9edf6;border-bottom:1px solid var(--rule);padding:18px 0}
 .settings label{display:block;font-size:.9rem;margin-bottom:6px;color:var(--ink-soft)}
 .settings__row{display:flex;gap:8px;flex-wrap:wrap}
 .settings__row input{flex:1 1 320px}
 .hint{font-size:.85rem;color:var(--ink-soft);margin:8px 0 0}
  
-/* ---------- ความคืบหน้ารวม ---------- */
 .meter{padding:34px 0 26px}
 .meter__title{
   font-family:"Noto Serif Thai",serif;
@@ -87,7 +84,6 @@ body{
 .stat dd{margin:0;font-size:1.5rem;font-weight:600;font-variant-numeric:tabular-nums}
 .stat--warn dd{color:var(--red-pen)}
  
-/* ---------- เลย์เอาต์หลัก ---------- */
 .board{
   display:grid;
   grid-template-columns:320px 1fr;
@@ -102,7 +98,6 @@ body{
   font-size:1.15rem;margin:0 0 14px;font-weight:600;
 }
  
-/* ---------- ฟอร์ม ---------- */
 .panel{
   background:var(--card);
   border:1px solid var(--rule);
@@ -146,7 +141,6 @@ output{float:right;font-weight:600;font-variant-numeric:tabular-nums;color:var(-
 .btn--solid{background:var(--ink);color:#fff}
 .btn--solid:hover{background:#0e1730}
  
-/* ---------- รายการ ---------- */
 .list__head{
   display:flex;align-items:baseline;justify-content:space-between;
   gap:12px;flex-wrap:wrap;margin-bottom:14px;
@@ -201,7 +195,6 @@ output{float:right;font-weight:600;font-variant-numeric:tabular-nums;color:var(-
   padding:28px;text-align:center;background:#fff;
 }
  
-/* ---------- แจ้งเตือน ---------- */
 .toast{
   position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);
   background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;

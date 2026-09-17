@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>สมุดติดตามการเรียน</title>
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="icons/favicon-64.png" sizes="64x64" type="image/png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#16213e">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +22,6 @@
   </div>
 </header>
  
-<!-- แถบตั้งค่า Google Sheet -->
 <div id="settings" class="settings" hidden>
   <div class="wrap">
     <label for="apiUrl">ลิงก์เว็บแอปของ Apps Script (ลงท้ายด้วย /exec)</label>
@@ -38,7 +36,6 @@
  
 <main class="wrap">
  
-  <!-- ความคืบหน้ารวม -->
   <section class="meter" aria-labelledby="meterTitle">
     <h2 id="meterTitle" class="meter__title">ความคืบหน้าทั้งหมด</h2>
     <div class="meter__bar">
@@ -55,7 +52,6 @@
  
   <div class="board">
  
-    <!-- ฟอร์มกรอก / แก้ไข -->
     <aside class="panel" aria-labelledby="formTitle">
       <h2 id="formTitle" class="panel__title">เพิ่มหัวข้อใหม่</h2>
       <form id="itemForm" class="form" autocomplete="off">
@@ -84,7 +80,6 @@
       </form>
     </aside>
  
-    <!-- รายการ -->
     <section class="list" aria-labelledby="listTitle">
       <div class="list__head">
         <h2 id="listTitle" class="panel__title">รายการทั้งหมด</h2>

@@ -1,8 +1,4 @@
-/* สมุดติดตามการเรียน — ตรรกะของแอป
-   ถ้าใส่ลิงก์เว็บแอปของ Apps Script ข้อมูลจะอ่าน/เขียนที่ Google ชีต
-   ถ้าไม่ใส่ ข้อมูลจะเก็บไว้ในเบราว์เซอร์เครื่องนี้ */
- 
-const DEFAULT_API_URL = 'https://script.google.com/macros/s/AKfycbzB7MjF5rBHzmcC0IK-DLPZuru-iK4rNrgHaL8F-XG_ia1pfy_Lhlc6dFVHntwe5HyV/exec'; // ใส่ลิงก์ .../exec ตรงนี้ก็ได้ หรือกรอกในหน้าเว็บ
+const DEFAULT_API_URL = 'https://script.google.com/macros/s/AKfycbzvwJ4iCb0jw8lu7egk0L0Yxi0BYI4aQTg2_HmPTDqrpm8RyIAUg7bl1rXp1QC_Q65c/exec';
  
 const LS_ITEMS = 'study.items';
 const LS_URL = 'study.apiUrl';
@@ -12,13 +8,11 @@ let apiUrl = localStorage.getItem(LS_URL) || DEFAULT_API_URL;
  
 const $ = (id) => document.getElementById(id);
  
-/* ---------- ชั้นข้อมูล ---------- */
- 
 async function api(action, payload) {
   if (!apiUrl) return localApi(action, payload);
   const res = await fetch(apiUrl, {
     method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // เลี่ยง preflight ของ CORS
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify({ action, ...payload })
   });
   if (!res.ok) throw new Error('เชื่อมต่อชีตไม่สำเร็จ (' + res.status + ')');
@@ -36,8 +30,6 @@ function localApi(action, payload) {
   localStorage.setItem(LS_ITEMS, JSON.stringify(next));
   return Promise.resolve(next);
 }
- 
-/* ---------- ตัวช่วย ---------- */
  
 const num = (v) => Math.max(0, Math.min(100, Math.round(Number(v) || 0)));
 const todayStr = () => new Date().toISOString().slice(0, 10);
@@ -75,8 +67,6 @@ function toast(msg, isError) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
 }
- 
-/* ---------- การแสดงผล ---------- */
  
 function render() {
   renderSummary();
@@ -186,8 +176,6 @@ function itemRow(i) {
   </article>`;
 }
  
-/* ---------- ฟอร์ม ---------- */
- 
 function resetForm() {
   $('itemForm').reset();
   $('itemId').value = '';
@@ -210,8 +198,6 @@ function fillForm(item) {
   $('cancelEdit').hidden = false;
   $('subject').focus();
 }
- 
-/* ---------- เหตุการณ์ ---------- */
  
 $('progress').addEventListener('input', (e) => {
   $('progressOut').textContent = e.target.value + '%';
@@ -290,8 +276,6 @@ $('clearUrl').addEventListener('click', async () => {
   await load();
   toast('กลับมาเก็บข้อมูลในเครื่องนี้');
 });
- 
-/* ---------- เริ่มต้น ---------- */
  
 async function load() {
   try {
