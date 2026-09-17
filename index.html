@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>สมุดติดตามการเรียน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Noto+Serif+Thai:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <h1 class="logo">สมุดติดตามการเรียน</h1>
+    <button id="settingsBtn" class="linkbtn" type="button">ตั้งค่าการเชื่อมต่อ</button>
+  </div>
+</header>
+ 
+<!-- แถบตั้งค่า Google Sheet -->
+<div id="settings" class="settings" hidden>
+  <div class="wrap">
+    <label for="apiUrl">ลิงก์เว็บแอปของ Apps Script (ลงท้ายด้วย /exec)</label>
+    <div class="settings__row">
+      <input type="url" id="apiUrl" placeholder="https://script.google.com/macros/s/.../exec">
+      <button id="saveUrl" class="btn btn--solid" type="button">เชื่อมต่อ</button>
+      <button id="clearUrl" class="btn" type="button">ใช้เครื่องนี้อย่างเดียว</button>
+    </div>
+    <p class="hint">ยังไม่ใส่ลิงก์ก็ใช้งานได้ ข้อมูลจะถูกเก็บไว้ในเบราว์เซอร์เครื่องนี้เท่านั้น</p>
+  </div>
+</div>
+ 
+<main class="wrap">
+ 
+  <!-- ความคืบหน้ารวม -->
+  <section class="meter" aria-labelledby="meterTitle">
+    <h2 id="meterTitle" class="meter__title">ความคืบหน้าทั้งหมด</h2>
+    <div class="meter__bar">
+      <div class="meter__fill" id="overallFill" style="width:0%"></div>
+      <span class="meter__value" id="overallValue">0%</span>
+    </div>
+    <dl class="stats">
+      <div class="stat"><dt>วิชา</dt><dd id="statSubjects">0</dd></div>
+      <div class="stat"><dt>หัวข้อทั้งหมด</dt><dd id="statTotal">0</dd></div>
+      <div class="stat"><dt>ทำเสร็จแล้ว</dt><dd id="statDone">0</dd></div>
+      <div class="stat stat--warn"><dt>เลยกำหนดส่ง</dt><dd id="statLate">0</dd></div>
+    </dl>
+  </section>
+ 
+  <div class="board">
+ 
+    <!-- ฟอร์มกรอก / แก้ไข -->
+    <aside class="panel" aria-labelledby="formTitle">
+      <h2 id="formTitle" class="panel__title">เพิ่มหัวข้อใหม่</h2>
+      <form id="itemForm" class="form" autocomplete="off">
+        <input type="hidden" id="itemId">
+ 
+        <label for="subject">วิชา</label>
+        <input type="text" id="subject" list="subjectList" placeholder="เช่น คณิตศาสตร์" required>
+        <datalist id="subjectList"></datalist>
+ 
+        <label for="topic">เนื้อหา / หัวข้อ</label>
+        <input type="text" id="topic" placeholder="เช่น บทที่ 3 ตรีโกณมิติ" required>
+ 
+        <label for="dueDate">กำหนดส่ง</label>
+        <input type="date" id="dueDate">
+ 
+        <label for="progress">ทำไปแล้ว <output id="progressOut">0%</output></label>
+        <input type="range" id="progress" min="0" max="100" step="5" value="0">
+ 
+        <label for="note">บันทึกเพิ่มเติม</label>
+        <textarea id="note" rows="2" placeholder="สิ่งที่ต้องเตรียม ข้อสอบ หรือแหล่งอ่าน"></textarea>
+ 
+        <div class="form__actions">
+          <button type="submit" class="btn btn--solid" id="submitBtn">บันทึก</button>
+          <button type="button" class="btn" id="cancelEdit" hidden>ยกเลิกการแก้ไข</button>
+        </div>
+      </form>
+    </aside>
+ 
+    <!-- รายการ -->
+    <section class="list" aria-labelledby="listTitle">
+      <div class="list__head">
+        <h2 id="listTitle" class="panel__title">รายการทั้งหมด</h2>
+        <div class="filters">
+          <select id="filterSubject" aria-label="กรองตามวิชา">
+            <option value="">ทุกวิชา</option>
+          </select>
+          <select id="sortBy" aria-label="เรียงลำดับ">
+            <option value="due">เรียงตามวันส่ง</option>
+            <option value="progress">เรียงตามความคืบหน้า</option>
+            <option value="subject">เรียงตามวิชา</option>
+          </select>
+        </div>
+      </div>
+      <div id="groups"></div>
+      <p id="empty" class="empty">ยังไม่มีข้อมูล เริ่มจากกรอกวิชาแรกทางซ้ายได้เลย</p>
+    </section>
+ 
+  </div>
+</main>
+ 
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+ 
+<script src="app.js"></script>
+</body>
+</html>
+ 
